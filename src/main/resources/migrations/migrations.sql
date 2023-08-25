@@ -24,7 +24,9 @@ CREATE TABLE "member"(
 CREATE TABLE "book"(
   "id_book" SERIAL PRIMARY KEY,
   "title" VARCHAR(200) NOT NULL,
-  "description" TEXT NOT NULL
+  "description" TEXT NOT NULL,
+  "id_author" INT REFERENCES "author"("id_author") NOT NULL,
+  "id_category" INT REFERENCES "category"("id_category")  NOT NULL
 );
 
 CREATE TABLE "borrow"(

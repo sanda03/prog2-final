@@ -11,4 +11,5 @@ import lombok.*;
 public class Book {
     private Integer idBook;
     private String title, description;
+    private Integer idAuthor, idCategory;
 }

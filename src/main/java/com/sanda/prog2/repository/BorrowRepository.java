@@ -20,7 +20,7 @@ public class BorrowRepository{
                 resultSet.getInt("id_borrow"),
                 resultSet.getInt("id_book"),
                 resultSet.getInt("id_member"),
-                resultSet.getTimestamp("start_date,"),
+                resultSet.getTimestamp("start_date"),
                 resultSet.getTimestamp("end_date"),
                 resultSet.getBoolean("is_returned")
         );
@@ -91,8 +91,8 @@ public class BorrowRepository{
 
     public Borrow updateBorrow(Borrow borrow) throws SQLException {
         if(this.getBorrowById(borrow.getIdBorrow()) != null){
-            String query = "UPDATE \"borrow\" SET \"id_book\" = ? , \"id_member\" = ?" +
-                "\"start_date\"= ?, \"end_date\" = ? , \"is_returned\" = ? WHERE id_borrow = ?";
+            String query = "UPDATE \"borrow\" SET \"id_book\" = ? , \"id_member\" = ?, " +
+                "\"start_date\" = ?, \"end_date\" = ? , \"is_returned\" = ? WHERE \"id_borrow\" = ?";
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setInt(1,borrow.getIdBook());
             statement.setInt(2,borrow.getIdMember());

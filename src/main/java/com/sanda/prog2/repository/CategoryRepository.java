@@ -66,7 +66,7 @@ public class CategoryRepository {
     }
 
     public Category createCategory(Category category) throws SQLException {
-        String query = "INSERT INTO \"category\"(\"name\") VALUES (?,?)";
+        String query = "INSERT INTO \"category\"(\"name\") VALUES (?)";
         PreparedStatement statement = this.connection.prepareStatement(query);
         statement.setString(1,category.getName());
         statement.executeUpdate();

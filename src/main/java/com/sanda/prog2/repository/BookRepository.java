@@ -19,7 +19,9 @@ public class BookRepository {
         return new Book(
             resultSet.getInt("id_book"),
             resultSet.getString("title"),
-            resultSet.getString("description")
+            resultSet.getString("description"),
+            resultSet.getInt("id_author"),
+            resultSet.getInt("id_category")
         );
     }
     private String createQuery(Book book){
@@ -33,6 +35,18 @@ public class BookRepository {
             if(status)
                 query.append(", ");
             query.append("\"description\" = ? ");
+            status = true;
+        }
+        if(book.getIdAuthor() != null){
+            if(status)
+                query.append(", ");
+            query.append("\"id_author\" = ? ");
+            status = true;
+        }
+        if(book.getIdCategory() != null){
+            if(status)
+                query.append(", ");
+            query.append("\"id_category\" = ? ");
         }
         return query.toString();
     }
@@ -70,11 +84,14 @@ public class BookRepository {
 
     public Book updateBook(Book book) throws SQLException {
         if(this.getBookById(book.getIdBook()) != null){
-            String query = "UPDATE \"book\" SET \"title\" = ? , \"description\" = ? WHERE \"id_book\" = ?";
+            String query = "UPDATE \"book\" SET \"title\" = ? , \"description\" = ?, \"id_author\" = ? , \"id_category\" = ?" +
+             " WHERE \"id_book\" = ?";
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1,book.getTitle());
             statement.setString(2,book.getDescription());
-            statement.setInt(3,book.getIdBook());
+            statement.setInt(3,book.getIdAuthor());
+            statement.setInt(4,book.getIdCategory());
+            statement.setInt(5,book.getIdBook());
             statement.executeUpdate();
             return book;
         }
@@ -90,6 +107,10 @@ public class BookRepository {
                 statement.setString(++valueIndex, book.getTitle());
             if(book.getDescription() != null)
                 statement.setString(++valueIndex, book.getDescription());
+            if(book.getIdAuthor() != null)
+                statement.setInt(++valueIndex, book.getIdAuthor());
+            if(book.getIdCategory() != null)
+                statement.setInt(++valueIndex, book.getIdCategory());
             statement.setInt(++valueIndex, book.getIdBook());
             statement.executeUpdate();
             return this.getBookById(book.getIdBook());
@@ -98,10 +119,12 @@ public class BookRepository {
     }
 
     public Book createBook(Book book) throws SQLException {
-        String query = "INSERT INTO \"book\"(\"title\",\"description\") VALUES (?,?)";
+        String query = "INSERT INTO \"book\"(\"title\",\"description\",\"id_author\",\"id_category\") VALUES (?,?,?,?)";
         PreparedStatement statement = this.connection.prepareStatement(query);
         statement.setString(1,book.getTitle());
         statement.setString(2,book.getDescription());
+        statement.setInt(3,book.getIdAuthor());
+        statement.setInt(4,book.getIdCategory());
         statement.executeUpdate();
         String queryNewBook = "SELECT * FROM \"book\" ORDER BY \"id_book\" DESC LIMIT 1";
         ResultSet resultSet = this.connection.createStatement().executeQuery(queryNewBook);

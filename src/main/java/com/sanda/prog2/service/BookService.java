@@ -18,7 +18,9 @@ public class BookService {
         if(testId && book.getIdBook() == null)
             return true;
         return book.getTitle() == null ||
-                book.getDescription() == null;
+                book.getDescription() == null ||
+                book.getIdAuthor() == null ||
+                book.getIdCategory() == null;
     }
     public List<Book> getAllBooks(HttpServletResponse response){
         try {
