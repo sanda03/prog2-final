@@ -10,8 +10,8 @@ CREATE TABLE "author"(
   "first_name" VARCHAR(200) NOT NULL
 );
 
-CREATE TABLE "class"(
-  "id_class" SERIAL PRIMARY KEY,
+CREATE TABLE "category"(
+  "id_category" SERIAL PRIMARY KEY,
   "name" VARCHAR(200) NOT NULL
 );
 
