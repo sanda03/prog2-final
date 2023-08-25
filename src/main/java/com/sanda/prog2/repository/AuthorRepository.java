@@ -70,8 +70,7 @@ public class AuthorRepository {
 
     public Author updateAuthor(Author author) throws SQLException {
         if(this.getAuthorById(author.getIdAuthor()) != null){
-            String query =
-                "UPDATE \"author\" SET \"name\" = ? , \"first_name\" = ? WHERE \"id_author\" = ?";
+            String query = "UPDATE \"author\" SET \"name\" = ? , \"first_name\" = ? WHERE \"id_author\" = ?";
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1,author.getName());
             statement.setString(2,author.getFirstName());

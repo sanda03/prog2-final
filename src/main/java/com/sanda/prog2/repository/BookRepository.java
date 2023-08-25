@@ -70,8 +70,7 @@ public class BookRepository {
 
     public Book updateBook(Book book) throws SQLException {
         if(this.getBookById(book.getIdBook()) != null){
-            String query =
-                    "UPDATE \"book\" SET \"name\" = ? , \"first_name\" = ? WHERE \"id_book\" = ?";
+            String query = "UPDATE \"book\" SET \"title\" = ? , \"description\" = ? WHERE \"id_book\" = ?";
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1,book.getTitle());
             statement.setString(2,book.getDescription());

@@ -91,8 +91,7 @@ public class BorrowRepository{
 
     public Borrow updateBorrow(Borrow borrow) throws SQLException {
         if(this.getBorrowById(borrow.getIdBorrow()) != null){
-            String query =
-                "UPDATE \"borrow\" SET \"id_book\" = ? , \"id_member\" = ?" +
+            String query = "UPDATE \"borrow\" SET \"id_book\" = ? , \"id_member\" = ?" +
                 "\"start_date\"= ?, \"end_date\" = ? , \"is_returned\" = ? WHERE id_borrow = ?";
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setInt(1,borrow.getIdBook());
@@ -130,8 +129,7 @@ public class BorrowRepository{
     }
 
     public Borrow createBorrow(Borrow borrow) throws SQLException {
-        String query =
-                "INSERT INTO \"borrow\"(\"id_book\",\"id_member\",\"start_date\",\"end_date\",\"is_returned\")" +
+        String query = "INSERT INTO \"borrow\"(\"id_book\",\"id_member\",\"start_date\",\"end_date\",\"is_returned\")" +
                 " VALUES (?,?,?,?,?)";
         PreparedStatement statement = this.connection.prepareStatement(query);
         statement.setInt(1,borrow.getIdBook());

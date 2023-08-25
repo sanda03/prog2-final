@@ -70,8 +70,7 @@ public class MemberRepository {
 
     public Member updateMember(Member member) throws SQLException {
         if(this.getMemberById(member.getIdMember()) != null){
-            String query =
-                    "UPDATE \"member\" SET \"name\" = ? , \"first_name\" = ? WHERE \"id_member\" = ?";
+            String query = "UPDATE \"member\" SET \"name\" = ? , \"first_name\" = ? WHERE \"id_member\" = ?";
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1,member.getName());
             statement.setString(2,member.getFirstName());
