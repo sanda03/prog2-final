@@ -10,5 +10,5 @@ import lombok.*;
 @ToString
 public class Book {
     private Integer idBook;
-    private String title, description, type;
+    private String title, description;
 }
