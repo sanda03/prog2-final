@@ -9,6 +9,6 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class Category {
-    private Integer idClass;
+    private Integer idCategory;
     private String name;
 }
