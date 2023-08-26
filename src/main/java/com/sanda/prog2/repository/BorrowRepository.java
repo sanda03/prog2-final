@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Repository
-public class BorrowRepository{
+public class BorrowRepository implements BorrowRepositoryInterface{
     private Connection connection;
     private Borrow newBorrow(ResultSet resultSet) throws SQLException {
         return new Borrow(
@@ -57,6 +57,8 @@ public class BorrowRepository{
         }
         return query.toString();
     }
+
+    @Override
     public List<Borrow> getAllBorrows() throws SQLException{
         String query = "SELECT * FROM \"borrow\"";
         ResultSet resultSet = this.connection.createStatement().executeQuery(query);
@@ -67,6 +69,7 @@ public class BorrowRepository{
         return listBorrows;
     }
 
+    @Override
     public Borrow getBorrowById(Integer id) throws SQLException {
         String query = "SELECT * FROM \"borrow\" WHERE \"id_borrow\" = ? ";
         PreparedStatement statement = this.connection.prepareStatement(query);
@@ -78,6 +81,7 @@ public class BorrowRepository{
         return null;
     }
 
+    @Override
     public Borrow deleteBorrow(Integer idBorrow) throws SQLException {
         Borrow borrow = this.getBorrowById(idBorrow);
         if( borrow != null){
@@ -89,6 +93,7 @@ public class BorrowRepository{
         return borrow;
     }
 
+    @Override
     public Borrow updateBorrow(Borrow borrow) throws SQLException {
         if(this.getBorrowById(borrow.getIdBorrow()) != null){
             String query = "UPDATE \"borrow\" SET \"id_book\" = ? , \"id_member\" = ?, " +
@@ -106,6 +111,7 @@ public class BorrowRepository{
         return null;
     }
 
+    @Override
     public Borrow updatePartialBorrow(Borrow borrow) throws SQLException {
         if(this.getBorrowById(borrow.getIdBorrow()) != null) {
             int valueIndex = 0;
@@ -128,6 +134,7 @@ public class BorrowRepository{
         return null;
     }
 
+    @Override
     public Borrow createBorrow(Borrow borrow) throws SQLException {
         String query = "INSERT INTO \"borrow\"(\"id_book\",\"id_member\",\"start_date\",\"end_date\",\"is_returned\")" +
                 " VALUES (?,?,?,?,?)";

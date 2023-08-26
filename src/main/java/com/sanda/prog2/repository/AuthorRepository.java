@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Repository
-public class AuthorRepository {
+public class AuthorRepository implements AuthorRepositoryInterface{
     private Connection connection;
     private Author newAuthor(ResultSet resultSet) throws SQLException {
         return new Author(
@@ -22,6 +22,7 @@ public class AuthorRepository {
             resultSet.getString("first_name")
         );
     }
+
     private String createQuery(Author author){
         StringBuilder query = new StringBuilder("SET ");
         boolean status = false;
@@ -36,6 +37,8 @@ public class AuthorRepository {
         }
         return query.toString();
     }
+
+    @Override
     public List<Author> getAllAuthors() throws SQLException{
         String query = "SELECT * FROM \"author\"";
         ResultSet resultSet = this.connection.createStatement().executeQuery(query);
@@ -46,6 +49,7 @@ public class AuthorRepository {
         return listAuthors;
     }
 
+    @Override
     public Author getAuthorById(Integer id) throws SQLException {
         String query = "SELECT * FROM \"author\" WHERE \"id_author\" = ? ";
         PreparedStatement statement = this.connection.prepareStatement(query);
@@ -57,6 +61,7 @@ public class AuthorRepository {
         return null;
     }
 
+    @Override
     public Author deleteAuthor(Integer idAuthor) throws SQLException {
         Author author = this.getAuthorById(idAuthor);
         if( author != null){
@@ -68,6 +73,7 @@ public class AuthorRepository {
         return author;
     }
 
+    @Override
     public Author updateAuthor(Author author) throws SQLException {
         if(this.getAuthorById(author.getIdAuthor()) != null){
             String query = "UPDATE \"author\" SET \"name\" = ? , \"first_name\" = ? WHERE \"id_author\" = ?";
@@ -81,6 +87,7 @@ public class AuthorRepository {
         return null;
     }
 
+    @Override
     public Author updatePartialAuthor(Author author) throws SQLException {
         if(this.getAuthorById(author.getIdAuthor()) != null) {
             int valueIndex = 0;
@@ -97,6 +104,7 @@ public class AuthorRepository {
         return null;
     }
 
+    @Override
     public Author createAuthor(Author author) throws SQLException {
         String query = "INSERT INTO \"author\"(\"name\",\"first_name\") VALUES (?,?)";
         PreparedStatement statement = this.connection.prepareStatement(query);

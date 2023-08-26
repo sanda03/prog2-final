@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Repository
-public class CategoryRepository {
+public class CategoryRepository implements CategoryRepositoryInterface{
     private Connection connection;
     private Category newCategory(ResultSet resultSet) throws SQLException {
         return new Category(
@@ -21,6 +21,8 @@ public class CategoryRepository {
             resultSet.getString("name")
         );
     }
+
+    @Override
     public List<Category> getAllCategory() throws SQLException{
         String query = "SELECT * FROM \"category\"";
         ResultSet resultSet = this.connection.createStatement().executeQuery(query);
@@ -31,6 +33,7 @@ public class CategoryRepository {
         return listCategory;
     }
 
+    @Override
     public Category getCategoryById(Integer id) throws SQLException {
         String query = "SELECT * FROM \"category\" WHERE \"id_category\" = ? ";
         PreparedStatement statement = this.connection.prepareStatement(query);
@@ -42,6 +45,7 @@ public class CategoryRepository {
         return null;
     }
 
+    @Override
     public Category deleteCategory(Integer idCategory) throws SQLException {
         Category category = this.getCategoryById(idCategory);
         if( category != null){
@@ -53,6 +57,7 @@ public class CategoryRepository {
         return category;
     }
 
+    @Override
     public Category updateCategory(Category category) throws SQLException {
         if(this.getCategoryById(category.getIdCategory()) != null){
             String query = "UPDATE \"category\" SET \"name\" = ?  WHERE \"id_category\" = ?";
@@ -65,6 +70,7 @@ public class CategoryRepository {
         return null;
     }
 
+    @Override
     public Category createCategory(Category category) throws SQLException {
         String query = "INSERT INTO \"category\"(\"name\") VALUES (?)";
         PreparedStatement statement = this.connection.prepareStatement(query);

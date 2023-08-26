@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Repository
-public class BookRepository {
+public class BookRepository implements BookRepositoryInterface{
     private Connection connection;
     private Book newBook(ResultSet resultSet) throws SQLException {
         return new Book(
@@ -50,6 +50,8 @@ public class BookRepository {
         }
         return query.toString();
     }
+
+    @Override
     public List<Book> getAllBooks() throws SQLException{
         String query = "SELECT * FROM \"book\"";
         ResultSet resultSet = this.connection.createStatement().executeQuery(query);
@@ -60,6 +62,7 @@ public class BookRepository {
         return listBooks;
     }
 
+    @Override
     public Book getBookById(Integer id) throws SQLException {
         String query = "SELECT * FROM \"book\" WHERE \"id_book\" = ? ";
         PreparedStatement statement = this.connection.prepareStatement(query);
@@ -71,6 +74,7 @@ public class BookRepository {
         return null;
     }
 
+    @Override
     public Book deleteBook(Integer idBook) throws SQLException {
         Book book = this.getBookById(idBook);
         if( book != null){
@@ -82,6 +86,7 @@ public class BookRepository {
         return book;
     }
 
+    @Override
     public Book updateBook(Book book) throws SQLException {
         if(this.getBookById(book.getIdBook()) != null){
             String query = "UPDATE \"book\" SET \"title\" = ? , \"description\" = ?, \"id_author\" = ? , \"id_category\" = ?" +
@@ -98,6 +103,7 @@ public class BookRepository {
         return null;
     }
 
+    @Override
     public Book updatePartialBook(Book book) throws SQLException {
         if(this.getBookById(book.getIdBook()) != null) {
             int valueIndex = 0;
@@ -118,6 +124,7 @@ public class BookRepository {
         return null;
     }
 
+    @Override
     public Book createBook(Book book) throws SQLException {
         String query = "INSERT INTO \"book\"(\"title\",\"description\",\"id_author\",\"id_category\") VALUES (?,?,?,?)";
         PreparedStatement statement = this.connection.prepareStatement(query);

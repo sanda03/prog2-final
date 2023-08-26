@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Repository
-public class MemberRepository {
+public class MemberRepository implements MemberRepositoryInterface{
     private Connection connection;
     private Member newMember(ResultSet resultSet) throws SQLException {
         return new Member(
@@ -36,6 +36,8 @@ public class MemberRepository {
         }
         return query.toString();
     }
+
+    @Override
     public List<Member> getAllMembers() throws SQLException{
         String query = "SELECT * FROM \"member\"";
         ResultSet resultSet = this.connection.createStatement().executeQuery(query);
@@ -46,6 +48,7 @@ public class MemberRepository {
         return listMembers;
     }
 
+    @Override
     public Member getMemberById(Integer id) throws SQLException {
         String query = "SELECT * FROM \"member\" WHERE \"id_member\" = ? ";
         PreparedStatement statement = this.connection.prepareStatement(query);
@@ -57,6 +60,7 @@ public class MemberRepository {
         return null;
     }
 
+    @Override
     public Member deleteMember(Integer idMember) throws SQLException {
         Member member = this.getMemberById(idMember);
         if( member != null){
@@ -68,6 +72,7 @@ public class MemberRepository {
         return member;
     }
 
+    @Override
     public Member updateMember(Member member) throws SQLException {
         if(this.getMemberById(member.getIdMember()) != null){
             String query = "UPDATE \"member\" SET \"name\" = ? , \"first_name\" = ? WHERE \"id_member\" = ?";
@@ -81,6 +86,7 @@ public class MemberRepository {
         return null;
     }
 
+    @Override
     public Member updatePartialMember(Member member) throws SQLException {
         if(this.getMemberById(member.getIdMember()) != null) {
             int valueIndex = 0;
@@ -97,6 +103,7 @@ public class MemberRepository {
         return null;
     }
 
+    @Override
     public Member createMember(Member member) throws SQLException {
         String query = "INSERT INTO \"member\"(\"name\",\"first_name\") VALUES (?,?)";
         PreparedStatement statement = this.connection.prepareStatement(query);
