@@ -21,7 +21,7 @@ public class CategoryRepository {
             resultSet.getString("name")
         );
     }
-    public List<Category> getALlCategory() throws SQLException{
+    public List<Category> getAllCategory() throws SQLException{
         String query = "SELECT * FROM \"category\"";
         ResultSet resultSet = this.connection.createStatement().executeQuery(query);
         List<Category> listCategory = new ArrayList<>();

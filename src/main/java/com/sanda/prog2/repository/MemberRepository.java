@@ -36,7 +36,7 @@ public class MemberRepository {
         }
         return query.toString();
     }
-    public List<Member> getALlMembers() throws SQLException{
+    public List<Member> getAllMembers() throws SQLException{
         String query = "SELECT * FROM \"member\"";
         ResultSet resultSet = this.connection.createStatement().executeQuery(query);
         List<Member> listMembers = new ArrayList<>();

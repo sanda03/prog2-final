@@ -36,7 +36,7 @@ public class AuthorRepository {
         }
         return query.toString();
     }
-    public List<Author> getALlAuthors() throws SQLException{
+    public List<Author> getAllAuthors() throws SQLException{
         String query = "SELECT * FROM \"author\"";
         ResultSet resultSet = this.connection.createStatement().executeQuery(query);
         List<Author> listAuthors = new ArrayList<>();

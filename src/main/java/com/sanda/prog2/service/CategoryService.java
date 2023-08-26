@@ -21,7 +21,7 @@ public class CategoryService {
     }
     public List<Category> getAllCategory(HttpServletResponse response){
         try {
-            return this.serviceRepository.getALlCategory();
+            return this.serviceRepository.getAllCategory();
         }
         catch (SQLException error){
             System.out.println(error.getMessage());

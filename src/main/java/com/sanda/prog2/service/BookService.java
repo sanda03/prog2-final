@@ -24,7 +24,7 @@ public class BookService {
     }
     public List<Book> getAllBooks(HttpServletResponse response){
         try {
-            return this.bookRepository.getALlBooks();
+            return this.bookRepository.getAllBooks();
         }
         catch (SQLException error){
             System.out.println(error.getMessage());

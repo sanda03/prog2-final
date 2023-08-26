@@ -22,7 +22,7 @@ public class MemberService {
     }
     public List<Member> getAllMembers(HttpServletResponse response){
         try {
-            return this.memberRepository.getALlMembers();
+            return this.memberRepository.getAllMembers();
         }
         catch (SQLException error){
             System.out.println(error.getMessage());

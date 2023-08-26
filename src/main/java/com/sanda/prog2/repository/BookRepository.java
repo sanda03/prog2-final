@@ -50,7 +50,7 @@ public class BookRepository {
         }
         return query.toString();
     }
-    public List<Book> getALlBooks() throws SQLException{
+    public List<Book> getAllBooks() throws SQLException{
         String query = "SELECT * FROM \"book\"";
         ResultSet resultSet = this.connection.createStatement().executeQuery(query);
         List<Book> listBooks = new ArrayList<>();

@@ -22,7 +22,7 @@ public class AuthorService {
     }
     public List<Author> getAllAuthors(HttpServletResponse response){
         try {
-            return this.authorRepository.getALlAuthors();
+            return this.authorRepository.getAllAuthors();
         }
         catch (SQLException error){
             System.out.println(error.getMessage());
