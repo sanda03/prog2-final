@@ -30,7 +30,7 @@ public class AuthorController {
     }
 
     @PutMapping
-    public Author deleteAuthor(HttpServletResponse response, @RequestBody Author author){
+    public Author updateAuthor(HttpServletResponse response, @RequestBody Author author){
         return this.authorService.updateAuthor(response,author);
     }
 
