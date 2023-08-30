@@ -1,4 +1,4 @@
-\c postgres
+DROP DATABASE IF EXIST prog2;
 
 CREATE DATABASE prog2;
 
