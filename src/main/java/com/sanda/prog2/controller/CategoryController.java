@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @PutMapping
-    public Category deleteCategory(HttpServletResponse response, @RequestBody Category category){
+    public Category updateCategory(HttpServletResponse response, @RequestBody Category category){
         return this.categoryService.updateCategory(response,category);
     }
 
