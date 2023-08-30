@@ -30,7 +30,7 @@ public class MemberController {
     }
 
     @PutMapping
-    public Member deleteMember(HttpServletResponse response, @RequestBody Member member){
+    public Member updateMember(HttpServletResponse response, @RequestBody Member member){
         return this.memberService.updateMember(response,member);
     }
 
