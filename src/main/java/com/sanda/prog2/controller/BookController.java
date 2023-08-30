@@ -30,7 +30,7 @@ public class BookController {
     }
 
     @PutMapping
-    public Book deleteBook(HttpServletResponse response, @RequestBody Book book){
+    public Book updateBook(HttpServletResponse response, @RequestBody Book book){
         return this.bookService.updateBook(response,book);
     }
 
