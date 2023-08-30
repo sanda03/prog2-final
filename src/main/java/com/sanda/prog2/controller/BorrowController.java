@@ -30,7 +30,7 @@ public class BorrowController {
     }
 
     @PutMapping
-    public Borrow deleteBorrow(HttpServletResponse response, @RequestBody Borrow borrow){
+    public Borrow updateBorrow(HttpServletResponse response, @RequestBody Borrow borrow){
         return this.borrowService.updateBorrow(response,borrow);
     }
 
